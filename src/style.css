@@ -1,0 +1,7 @@
+body {
+    background-image: url("./imagen/business.jpg");
+    font-family: 'Roboto', sans-serif;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    backdrop-filter: blur(10px);
+}
