@@ -5,3 +5,57 @@ body {
     background-size: 100% 100%;
     backdrop-filter: blur(10px);
 }
+
+form{
+	width:40%;
+	padding: 20%;
+	border-radius: 10px;
+    border:1px solid #0c0c0c;
+	margin:auto;
+	background-color:rgba(243, 237, 237, 0.192);
+    text-align: center;
+}
+
+.input-form{
+	width:100%;
+	font-weight:bold;
+	display:inline-block;
+    
+}
+
+.logo{
+    width:180%;
+    margin-top: -20%;
+    margin-left: -40%;
+}
+
+.img-user{
+    width:50%;
+    margin-top: 40%;
+    margin-left: -10%;
+}
+
+.user{
+    margin-top: 10%; 
+    margin-left: -10%; 
+    border-radius: 10px;
+    font-size: 100%;
+    }
+
+.input1 {
+    background-color: rgba(156, 200, 242, 0.267);
+    width: 120%;
+    height: 200%;
+    color: white;
+    font-weight: bolder;
+}
+
+
+
+.button{
+    width: 50%;
+    margin-left: 10%;
+    background-color: rgba(22, 43, 78, 0.856);
+    color: #9CC9F2;
+    font-size: 100%;
+}
