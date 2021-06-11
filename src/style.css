@@ -5,3 +5,7 @@ body {
     background-size: 100% 100%;
     backdrop-filter: blur(10px);
 }
+
+.logo{
+    align-items: center;
+}
