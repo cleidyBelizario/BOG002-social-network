@@ -1,24 +1,24 @@
 import { myMenu } from './menu.js'
 import { home } from './home.js'
-import { post } from './menu.js'
-// import { error404 } from "./404"
+import { post } from './post.js'
 
-export const changeRouter = (ruta) => {
 
-}
+// export const changeRouter = (hash) => {
+// }
 
-const showTemplate = (ruta) => {
+const showTemplate = (hash) => {
     const containerRoot = document.getElementById("router");
     containerRoot.innerHTML = myMenu();
 
-    switch (ruta) {
-        case '#home':
+    switch (hash) {
+        case '#/home':
             containerRoot.appendChild(home());
             break
-        case '#post':
+        case '#/post':
             containerRoot.appendChild(post());
             break
         default:
-            containerRoot.appendChild(error404());
+            containerRoot.innerHTML = `<h5> Pagina no encontrada </h5>`
     }
 }
+export {showTemplate}

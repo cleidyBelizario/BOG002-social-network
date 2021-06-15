@@ -4,6 +4,7 @@ body {
     background-attachment: fixed;
     background-size: 100% 100%;
     backdrop-filter: blur(10px);
+    width:40%;
 }
 
 form{
