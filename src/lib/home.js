@@ -1,11 +1,11 @@
 export const home = () => {
     const divHome = document.createElement("div");
 
-    const viemHome = `
+    const viewHome = `
     <h1> hola estoy en el home </h1>
     `
 
-    divHome.innerHTML = viemHome;
+    divHome.innerHTML = viewHome;
 
     return divHome;
 }

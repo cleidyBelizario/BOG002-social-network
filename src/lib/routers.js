@@ -1,16 +1,19 @@
 import { myMenu } from './menu.js'
 import { home } from './home.js'
 import { post } from './post.js'
+import { login } from './login.js'
 
 
-export const changeRouter = (hash) => {
-}
+const containerRoot = document.getElementById("router");
 
-const showTemplate = (hash) => {
-    const containerRoot = document.getElementById("router");
-    containerRoot.innerHTML = myMenu();
-
-    switch (hash) {
+const showTemplate = (route) => {
+  
+    containerRoot.innerHTML = '';
+    
+    switch (route) {
+        case '#/':
+            containerRoot.appendChild(login());
+            break
         case '#/home':
             containerRoot.appendChild(home());
             break
