@@ -1,9 +1,10 @@
 // Este es el punto de entrada de tu aplicacion
 
 import { myFunction } from './lib/index.js';
-//import { changeRouter } from './lib/routers.js';
+// import { changeRouter } from './lib/routers.js';
 import { myMenu } from './lib/menu.js';
 import { showTemplate } from './lib/routers.js';
+
 
 const iniciar = () => {
     document.getElementById("router").innerHTML = myMenu();
@@ -14,7 +15,9 @@ const iniciar = () => {
     showTemplate(window.location.hash);
     })
 }
-window.addEventListener('load', iniciar)
+window.addEventListener('load', iniciar);
 
 
-//
+
+
+

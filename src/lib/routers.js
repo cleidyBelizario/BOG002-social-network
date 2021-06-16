@@ -7,8 +7,8 @@ import { login } from './login.js'
 const containerRoot = document.getElementById("router");
 
 const showTemplate = (route) => {
-  
     containerRoot.innerHTML = '';
+
     
     switch (route) {
         case '#/':
