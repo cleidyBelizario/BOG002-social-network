@@ -1,18 +1,18 @@
 // Este es el punto de entrada de tu aplicacion
 
-import { myFunction } from './lib/index.js';
-// import { changeRouter } from './lib/routers.js';
-import { myMenu } from './lib/menu.js';
+//import { myFunction } from './lib/index.js';
+import { login, prueba } from './lib/login.js';
 import { showTemplate } from './lib/routers.js';
 
 
 const iniciar = () => {
-    document.getElementById("router").innerHTML = myMenu();
-
+//document.getElementById('root').appendChild(login());
+//prueba()
+showTemplate(window.location.hash);
+console.log(window.location.hash)
     window.addEventListener('hashchange', ()=> {
-    myFunction();
-    console.log(window.location.hash);
-    showTemplate(window.location.hash);
+    console.log(window.location.hash)
+        showTemplate(window.location.hash);
     })
 }
 window.addEventListener('load', iniciar);

@@ -3,6 +3,7 @@ export const post = () => {
 
     const viewPost = `
     <h3> hola estoy en el post </h3>
+    
     `
 
     divPost.innerHTML = viewPost;
