@@ -27,7 +27,15 @@ function getName (e){
     let userName = user1.value
     console.log(userName)
     saveName(userName);
+
+    if (userName == ""){
+     
+      alert("rellena plis")
+    } else{
+        window.location.href="#/home"
+    }
 }
+
 
 //funcion para guardar el nombre en el localStorage
 const saveName = () =>{
@@ -37,3 +45,4 @@ const saveName = () =>{
     }
 return divLogin
 }
+

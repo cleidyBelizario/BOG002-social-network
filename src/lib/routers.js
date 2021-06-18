@@ -10,6 +10,7 @@ const showTemplate = (route) => {
     containerRoot.innerHTML = '';
 
     
+  
     switch (route) {
         case '#/':
             containerRoot.appendChild(login());
@@ -18,7 +19,9 @@ const showTemplate = (route) => {
             containerRoot.appendChild(home());
             break
         case '#/post':
+            containerRoot.innerHTML = myMenu();
             containerRoot.appendChild(post());
+            
             break
         default:
             containerRoot.innerHTML = `<h5> Pagina no encontrada </h5>`

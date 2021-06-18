@@ -7,7 +7,9 @@ import { showTemplate } from './lib/routers.js';
 
 
 const iniciar = () => {
-    document.getElementById("router").innerHTML = myMenu();
+    showTemplate(window.location.hash);
+
+    // document.getElementById("router").innerHTML = myMenu();
 
     window.addEventListener('hashchange', ()=> {
     myFunction();
