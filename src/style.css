@@ -62,7 +62,9 @@ body {
 }
 
 #formPost{
-    width:60%;
+    width:190%;
+    
+	padding: 20%;
 	border-radius: 10px;
     border:1px solid #0c0c0c;
 	margin:auto;
@@ -70,7 +72,14 @@ body {
     text-align: center;
 }
 
+.input1{
+	width:100%;
+	font-weight:bold;
+	display:inline-block;
+    margin-top: 5%;
+    
+}
  .menu{
-    width: 5%;
+    width: 15%;
     
 }
