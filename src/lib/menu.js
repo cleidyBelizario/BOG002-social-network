@@ -2,14 +2,18 @@
 export const myMenu = () => {
     
     const viewMenu = `
-        <ul>
-            <li><a href="#/"><i class=" site-nav--icon"></i> login</a></li>
-            <li><a href="#/home"><i class="fa fa-home site-nav--icon"></i> HOME </a></li>
-            <li> <a href="#/post"><i class="fa fa-paper-plane site-nav--icon"></i> POST</a></li>
-            <li><a href="#/cerrar"><i class="fa fa-times site-nav--icon"></i> Cerrar</a></li>
+        <footer
+        <nav>
+    <ul>
+            <li><a  id="inicio" href="#/home"><img class="home menu" src="imagen//home.svg"></a> </li>
 
+            <li><a id="post" href="#/post"><img class="post menu" src="imagen//paperplane.svg"></a> </li>
+
+            <li><a id="cerrar" href="#/"><img class="cerrar menu" src="imagen//cerrar.svg"></a> </li>
+        
         </ul>  
-    
+        </nav>
+    </footer>
     `
     return viewMenu;
     };  

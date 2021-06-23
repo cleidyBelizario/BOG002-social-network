@@ -32,19 +32,39 @@ export function prueba() {
         e.preventDefault()
         //console.log('hola estoy funcionando')
         let userName = user1.value
-       if ( userName ){
+        if ( userName ){
         console.log(userName)
         window.location.href="#/home"
     
     } else {
-       
-        alert("Rellenar campo")
+    alert("Rellenar campo")
     }
-    }
+    
         
 
-    //funcion para guardar el nombre en el localStorage
+/*    //funcion para guardar el nombre en el localStorage
     const saveName = () => {
+let user1 = divLogin.querySelector("#user");
+console.log(user1)
+const btnlogin1 = divLogin.querySelector("#btnLogin")
+btnlogin1.addEventListener('click', getName) 
+
+function getName (e){
+    e.preventDefault()
+    let userName = user1.value
+    console.log(userName)
+    saveName(userName);
+
+    if (userName == ""){
+alert("rellena plis")
+    } else{
+        window.location.href="#/home"
+    }
+}*/
+
+
+//funcion para guardar el nombre en el localStorage
+const saveName = () =>{
 
         let myUser = localStorage.setItem('name', document.getElementById('user').value);
         //console.log(`hola bienvenida  ${myUser}`)
@@ -52,6 +72,6 @@ export function prueba() {
 
 }
 
-
+}
 
 

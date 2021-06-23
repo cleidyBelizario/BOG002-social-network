@@ -1,15 +1,14 @@
-import { myMenu } from './menu.js';
-
-
+import { myMenu } from "./menu.js";
 export const home = () => {
     const divHome = document.createElement('div');
     
 
-    const viewHome = `${myMenu()}
-    <h1> hola estoy en el home </h1>
-
+    const viewHome = `
+    <img src="imagen/SqualoLogo.png" alt="" class="logoPH">
+    ${myMenu()}
     
     `
+
     
     divHome.innerHTML = viewHome;
 

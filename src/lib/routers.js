@@ -1,7 +1,7 @@
 import { myMenu } from './menu.js'
 import { home } from './home.js'
-import { post } from './post.js'
-import { login, prueba } from './login.js'
+import { post, saveTitleContent } from './post.js'
+import { login, prueba  } from './login.js'
 
 
 const containerRoot = document.getElementById("root");
@@ -13,8 +13,6 @@ const showTemplate = (route) => {
         
         case '':
         case '#/':
-            
-
             containerRoot.appendChild(login());
             prueba();
             break
@@ -25,7 +23,7 @@ const showTemplate = (route) => {
         case '#/post':
             containerRoot.innerHTML = myMenu();
             containerRoot.appendChild(post());
-            
+            saveTitleContent ()
             break
         default:
             containerRoot.innerHTML = `<img src="imagen/error404.jpg" alt="" class="error404">`

@@ -55,8 +55,6 @@ body {
     font-weight: bolder;
 }
 
-
-
 .button{
     width: 50%;
     margin-left: 10%;
@@ -65,11 +63,16 @@ body {
     font-size: 100%;
 }
 
-.error404{
-
-    width:300%;
-    margin-top: auto;
-    margin-left: -40%;
+#formPost{
+    width:60%;
+	border-radius: 10px;
+    border:1px solid #0c0c0c;
+	margin:auto;
+	background-color:rgba(243, 237, 237, 0.192);
+    text-align: center;
 }
 
-
+ .menu{
+    width: 5%;
+    
+}

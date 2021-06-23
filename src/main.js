@@ -10,6 +10,10 @@ const iniciar = () => {
 //prueba()
 showTemplate(window.location.hash);
 console.log(window.location.hash)
+    showTemplate(window.location.hash);
+
+    // document.getElementById("router").innerHTML = myMenu();
+
     window.addEventListener('hashchange', ()=> {
     console.log(window.location.hash)
         showTemplate(window.location.hash);
