@@ -5,12 +5,13 @@ export const home = () => {
 
     const viewHome = `
     <img src="imagen/SqualoLogo.png" alt="" class="logoPH">
+   
     ${myMenu()}
     
     `
 
     
     divHome.innerHTML = viewHome;
-
     return divHome;
 }
+

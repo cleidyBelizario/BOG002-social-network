@@ -45,14 +45,14 @@ export function prueba() {
 /*    //funcion para guardar el nombre en el localStorage
     const saveName = () => {
 let user1 = divLogin.querySelector("#user");
-console.log(user1)
+//console.log(user1)
 const btnlogin1 = divLogin.querySelector("#btnLogin")
 btnlogin1.addEventListener('click', getName) 
 
 function getName (e){
     e.preventDefault()
     let userName = user1.value
-    console.log(userName)
+   // console.log(userName)
     saveName(userName);
 
     if (userName == ""){

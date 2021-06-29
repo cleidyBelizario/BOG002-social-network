@@ -1,8 +1,9 @@
 export const post = () => {
-
   const divPost = document.createElement("div");
+
   const viewPost = `
   <section>
+    
     <form id="formPost" class="form">
     <img src="imagen/SqualoLogo.png" alt="" class="logoPH">
     <h3> Crea tu post </h3>
@@ -21,142 +22,81 @@ export const post = () => {
     <button class="button post" type="submit" id="btnPost"> <b>POST</b></button>
 </form>
 </section>
-<p id=parrafo></p>
+
+<p id=parrafo> </p>
     `
   divPost.innerHTML = viewPost;
   return divPost;
 }
 
-export function saveTitleContent() {
-  let title = document.querySelector('#title');
-  let content = document.querySelector('#content');
-  //console.log(title)
-  const btnPost = document.querySelector("#btnPost")
-  btnPost.addEventListener('click', getTitle)
 
-  function getTitle(e) {
-    e.preventDefault()
-    console.log('hola estoy funcionando')
-    let userTitle = title.value
-    let userContent = content.value
-    if (userTitle, userContent) {
-     savePost(userTitle, userContent);
-     savePostLocal()
-    } else {
-      alert("Rellenar campo")
-    }
-  }
-    // funcion para guardar el titulo y el contenido que el usuario ingrese.
-    let arrayPost = [];
-   
-    function savePost(title, content) {
-      let item = {
-        title1: title,
-        content1: content,
-      }
-      arrayPost.push(item);
-      return item;
-    }
-    //funcion para guardar en el local storage 
-  const savePostLocal = () => {
-  localStorage.setItem('Post', JSON.stringify(arrayPost));
-  paintPost();
-  }
-  
-  const paintPost = () => {
-    const postPaint = document.querySelector('#parrafo')
-    postPaint.innerHTML = '';
-    
-    let arrayPost = JSON.parse(localStorage.getItem('Post'));
-   // console.log(arrayPost)
-   if(arrayPost === null){
-    arrayPost = [];
-  }else{
+//para capturar lo que el usuario escriba y capturar el boton y se guarde en el local storage
+export function capturarBtn(e){
+let btnPost = document.querySelector('#btnPost') //para capturar el boton 
+btnPost.addEventListener('click', getPostUsuarios)
 
-    arrayPost.forEach(element => {
 
-      if(element.estado){
-        postPaint.innerHTML += `<div class="alert alert-success" role="alert"><i class="material-icons float-left mr-2">accessibility</i><b>${element.actividad}</b> - ${element.estado}<span class="float-right"><i class="material-icons">done</i><i class="material-icons">delete</i></span></div>`
-      }else{
-      postPaint.innerHTML += `<div class="alert alert-danger" role="alert"><i class="material-icons float-left mr-2">accessibility</i><b>${element.actividad}</b> - ${element.estado}<span class="float-right"><i class="material-icons">done</i><i class="material-icons">delete</i></span></div>`
-      }
-    });
+function getPostUsuarios(e) {
+  e.preventDefault()
+ // console.log('hola estoy funcionando')
+let userTitle = document.querySelector('#title').value;
+let userContent = document.querySelector('#content').value;
+userContent.reset
 
-    formularioUI.addEventListener('submit', (e) => {
-
-      e.preventDefault();
-      let actividadUI = document.querySelector('#actividad').value;
-    
-      CrearItem(actividadUI);
-      GuardarDB();
-    
-      formularioUI.reset();
-    
-    });
-    
-    //para borrar y pintar elemento 
-    
-    document.addEventListener('DOMContentLoaded', PintarDB);
-    
-    listaActividadesUI.addEventListener('click', (e) => {
-    
-      e.preventDefault();
-    
-      if(e.target.innerHTML === 'done' || e.target.innerHTML === 'delete'){
-        let texto = e.path[2].childNodes[1].innerHTML;
-        if(e.target.innerHTML === 'delete'){
-          // Accción de eliminar
-          EliminarDB(texto);
-        }
-        if(e.target.innerHTML === 'done'){
-          // Accción de editar
-          EditarDB(texto);
-        }
-      }
-    
-    });
-  }
+savePost(userTitle, userContent);
+savePostLocal()
 }
-
-  }
-
-  
-
-
-
-
-
-
-/*let peluqueria = savePost("peluqueria", "es una sociedad nueva")
-console.log(peluqueria)
-//funcion para capturar lo que el usuario escriba en titulo y contenidoz
-console.log(formularioPost);
-formularioPost.addEventListener('submit', (e) => {
-  e.preventDefault();
-  console.log('estoy dentro de la funcion');
-   saveTitle = document.getElementById("title").value;
-  let saveContent = document.getElementById("content").value;
-savePost(saveTitle, saveContent);
-
-  formularioPost.reset();
-})*/
-// export function saveTitleContent () {
-//   console.log("estoy funcionando")
-// let saveTitle = document.getElementById("title")
-// //console.log(saveTitle)
-// let saveContent = document.getElementById("content")
-// //console.log(saveContent)
-//const btnPost1 = divPost.getElementById('btnPost')
-//console.log(btnPost1)
-// btnPost1.addEventListener('click', getPost) 
-/*function getPost (e){
-    e.preventDefault()
-    let titlePost = saveTitle.value
-    let contentPost = saveContent.value
-console.log(titlePost, contentPost)
+}
+/*function getPost(e) {
+  e.preventDefault()
+let paintPost = document.querySelector('#parrafo')
+paintPost.innerHTML = '';
 }*/
 
+//funcion para ontener el nombre del emprendimiento y el contenido 
+let arrayPost = [];
+export function savePost(title, content) {
+  
+  let item = {
+    title1: title,
+    content1: content,
+  }
+  arrayPost.push(item);
+  return item;
+}
+//funcion para guardar en el local storage 
+export const savePostLocal = () => {
+localStorage.setItem('Post', JSON.stringify(arrayPost));
+paintPost()
+}
 
+export function paintPost(){
+  let post1 =document.querySelector('#parrafo');
+  // let title2 = document.getElementById('tittleTH');
+   //console.log(post1)
+  post1.innerHTML = '';
+  let arrayGetPost = JSON.parse(localStorage.getItem('post'));
+  savePost()
+console.log(arrayGetPost)
+  /*for(let i=0; i < nCantidadPost; i++ ){
+      let fila = document.createElement('div');
+      let celdaTitle = document.createElement('div');
+      let celdaContent = document.createElement('div');
 
+  let nodoTextoTitle = document.createTextNode(arTitle[i]);
+  // console.log(nodoTextoTitle)
+  let nodoTextoContent = document.createTextNode(arContent[i]);
+  // title2.textContent = 
 
+  let nodito = fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
+  let nodito2 = fila.appendChild(celdaContent.appendChild(nodoTextoContent));
+  // console.log(fila.appendChild(celdaTitle.appendChild(nodoTextoTitle)))
+  // fila.appendChild(celdaContent.appendChild(nodoTextoContent));
 
+  // nodoTextoContent.appendChild(post1);
+   post1.appendChild(nodito) 
+   post1.appendChild(nodito2)
+ console.log(post1)
+
+  }*/
+}
