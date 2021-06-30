@@ -3,6 +3,7 @@ import { home } from './home.js'
 import { post } from './post.js'
 import { login } from './login.js'
 import {savePost} from './post.js'
+
 // import { showPost } from './home.js'
 
 const containerRoot = document.getElementById("router");
@@ -18,7 +19,7 @@ const showTemplate = (route) => {
             break
         case '#/home':
             containerRoot.appendChild(home());
-            // showPost();
+            // savePost();
             break
         case '#/post':
             containerRoot.innerHTML = myMenu();

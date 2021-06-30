@@ -23,62 +23,33 @@ export const post = () => {
     <option value= "bq" >Barranquilla</option>
             </select> 
     <button class="button post" type="submit" id="btnPost"><b>POST</b></button>
+
     </form>
     <table id="tblPost">
-   <thead>
-   <tr>
-    <th> Title  </th>
-    <th>Content </th>
-   </tr>
-   </thead>
+      <thead>
+        <tr>
+          <th> Title  </th>
+          <th>Content </th>
+        </tr>
+      </thead>
    <tbody>
+
 
    </tbody>
    </table>
+    
 `
-
-  divPost.innerHTML = viewPost;
-
-// let posTitle = divPost.querySelector("#title");
-// let postContent = divPost.querySelector("#content")
-// // console.log(posTitle)
-// const btnPost1 = divPost.querySelector("#btnPost")
-// btnPost1.addEventListener('click', getTitleContent)
-
-// function getTitleContent (e){
-//   e.preventDefault()
-//   let title = posTitle.value
-//   let content = postContent.value
-//   console.log(content, title)
-// }
-
-// saveTitleContent(title);
-
-
- 
-  // window.location.href="#/home"
-
- 
-// const saveTitleContent = () =>{
-//   localStorage.setItem('user', document.getElementById('title').value);
-// }
-
-  return divPost;
+divPost.innerHTML = viewPost;
+return divPost;
 
 }
-
-
-
-//funcion para guardar el titulo y el contenido que el usuario ingrese.
-
-
 
 export function savePost(){
   let arrayTitle = [];
 let arrayContent = [];
 
 let botonPost = document.querySelector('#btnPost');
-botonPost.addEventListener('click', async ()=>{
+botonPost.addEventListener('click', savePost )
   let getTitle = document.querySelector('#title').value;
   
   let getContent = document.querySelector('#content').value;
@@ -90,90 +61,92 @@ botonPost.addEventListener('click', async ()=>{
 
 localStorage.setItem('title', JSON.stringify(arrayTitle));
 localStorage.setItem('content', JSON.stringify(arrayContent));
-await showPost();
-});
+showPost();
+;
 
   
 
 }
 
 function showPost(){
-  let post1 =document.querySelector('#tblPost');
+  let post1 =document.querySelector('#tblPost tbody');
   // let title2 = document.getElementById('tittleTH');
 // console.log(post1)
    post1.innerHTML = '';
-  let arTitle = JSON.parse(localStorage.getItem('title'));
-  let arContent = JSON.parse(localStorage.getItem('content'))
+  let arGetTitle = JSON.parse(localStorage.getItem('title'));
+  let arGetContent = JSON.parse(localStorage.getItem('content'))
 
-  let nCantidadPost = arTitle.length;
+  let nCantidadPost = arGetTitle.length;
 
   for(let i=0; i < nCantidadPost; i++ ){
-      let fila = document.createElement('div');
-      let celdaTitle = document.createElement('div');
-      let celdaContent = document.createElement('div');
+      let fila = document.createElement('tr');
+      let celdaTitle = document.createElement('td');
+      let celdaContent = document.createElement('td');
 
-  let nodoTextoTitle = document.createTextNode(arTitle[i]);
+  let nodoTextoTitle = document.createTextNode(arGetTitle[i]);
   // console.log(nodoTextoTitle)
-  let nodoTextoContent = document.createTextNode(arContent[i]);
+  let nodoTextoContent = document.createTextNode(arGetContent[i]);
   // title2.textContent = 
 
-  let nodito = fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
-  let nodito2 = fila.appendChild(celdaContent.appendChild(nodoTextoContent));
+  fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
+  fila.appendChild(celdaContent.appendChild(nodoTextoContent));
   // console.log(fila.appendChild(celdaTitle.appendChild(nodoTextoTitle)))
   // fila.appendChild(celdaContent.appendChild(nodoTextoContent));
 
   // nodoTextoContent.appendChild(post1);
-   post1.appendChild(nodito) 
-   post1.appendChild(nodito2)
- console.log(post1)
+   post1.appendChild(fila); 
+   
+//  console.log(post1)
 
   }
 }
-// function savePost(title, content) {
+
+//funcion para guardar el titulo y el contenido que el usuario ingrese.
+
+// export  function guardarboton (){
+// let botonPost = document.querySelector('#btnPost');
+// botonPost.addEventListener('click', async ()=>{
+//   let getTitle = document.querySelector('#title').value;
   
-//   let item = {
-//     title1: title,
-//     content1: content,
-// } 
-//  arrayPost.push(item);
-  
-//  return item;
+//   let getContent = document.querySelector('#content').value;
+//   // console.log(getTitle, getContent)
+//   arrayTitle.push(getTitle);
+//   // console.log(arrayTitle)
+//   arrayContent.push(getContent);
+// // title2.textContent = getTitle;
+
+// localStorage.setItem('title', JSON.stringify(arrayTitle));
+// localStorage.setItem('content', JSON.stringify(arrayContent));
+// await savePost();
+// });
 // }
 
-// let peluqueria = savePost("peluqueria", "es una sociedad nueva")
-// console.log(peluqueria)
+// let arrayTitle = [];
+// let arrayContent = [];
+// export function savePost(title, content) {
 
 
+//   let titleContentItem = {
+//     title1: title,
+//     content1: content,
+//     }
+    
+//   arrayTitle.push(titleContentItem.title1);
+//   console.log(arrayTitle)
+//   arrayContent.push(titleContentItem.content1);
+//   return (titleContentItem )
+// }
+//console.log(savePost("peluqueria", "emprendimiento"))
 
-//funcion para capturar lo que el usuario escriba en titulo y contenido 
+// let arrayTitle = [];
+// let arrayContent = [];
 
-/*const formularioPost = document.querySelector('#formPost')
-console.log(formularioPost);
-
-formularioPost.addEventListener('submit', (e) => {
-  e.preventDefault();
-  console.log('estoy dentro de la funcion');
-saveTitle = document.getElementById("title").value;
-  let saveContent = document.getElementById("content").value;
-savePost(saveTitle, saveContent);
+// let botonPost = document.querySelector('#btnPost');
+// botonPost.addEventListener('click', async ()=>{
+//   let getTitle = document.querySelector('#title').value;
   
 
-  formularioPost.reset();
-})*/
 
-// export function saveTitleContent () {
-//   console.log("estoy funcionando")
-// let saveTitle = document.getElementById("title")
-// //console.log(saveTitle)
-// let saveContent = document.getElementById("content")
-// //console.log(saveContent)
-// const btnPost1 = divPost.getElementById('btnPost')
-// console.log(btnPost1)
-// btnPost1.addEventListener('click', getPost) 
 
-/*function getPost (e){
-    e.preventDefault()
-    let titlePost = saveTitle.value
-    let contentPost = saveContent.value
-console.log(titlePost, contentPost)
-}*/
+
+  
