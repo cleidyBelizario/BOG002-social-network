@@ -45,27 +45,35 @@ return divPost;
 }
 
 export function savePost(){
-  let arrayTitle = [];
-let arrayContent = [];
 
 let botonPost = document.querySelector('#btnPost');
 botonPost.addEventListener('click', savePost )
   let getTitle = document.querySelector('#title').value;
   
   let getContent = document.querySelector('#content').value;
+  console.log(getPost(getTitle, getContent));
   // console.log(getTitle, getContent)
-  arrayTitle.push(getTitle);
-  // console.log(arrayTitle)
-  arrayContent.push(getContent);
+  // arrayTitle.push(getTitle);
+  // // console.log(arrayTitle)
+  // arrayContent.push(getContent);
 // title2.textContent = getTitle;
 
 localStorage.setItem('title', JSON.stringify(arrayTitle));
 localStorage.setItem('content', JSON.stringify(arrayContent));
 showPost();
-;
+}
 
-  
-
+//funcion para obtener el nombre del emprendimiento y del contenido
+let arrayTitle = [];
+let arrayContent = [];
+export function getPost(title, content) {
+  let item = {
+    title1: title,
+    content1: content,
+  }
+  arrayTitle.push(item);
+  arrayContent.push(item)
+  return item;
 }
 
 function showPost(){
@@ -74,32 +82,40 @@ function showPost(){
 // console.log(post1)
    post1.innerHTML = '';
   let arGetTitle = JSON.parse(localStorage.getItem('title'));
-  let arGetContent = JSON.parse(localStorage.getItem('content'))
+  let arGetContent = JSON.parse(localStorage.getItem('content'));
+  // let x = (arGetTitle + arGetContent)
+  // console.log(JSON.stringify(x))
 
-  let nCantidadPost = arGetTitle.length;
+  // let nCantidadPost = arGetTitle.length;
 
-  for(let i=0; i < nCantidadPost; i++ ){
+  // for(let i=0; i < nCantidadPost; i++ ){
+    arGetTitle.forEach(o => {
+    
+      // arGetContent.forEach(e => { 
+        console.log(o);
+          // post1.innerHTML += `<div> <b>${o.title1} </b></div>`
+      //})
+  
       let fila = document.createElement('tr');
       let celdaTitle = document.createElement('td');
       let celdaContent = document.createElement('td');
 
-  let nodoTextoTitle = document.createTextNode(arGetTitle[i]);
+  let nodoTextoTitle = document.createTextNode(`${o.title1}`);
   // console.log(nodoTextoTitle)
-  let nodoTextoContent = document.createTextNode(arGetContent[i]);
+  let nodoTextoContent = document.createTextNode(`${o.content1}`);
   // title2.textContent = 
 
   fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
-  fila.appendChild(celdaContent.appendChild(nodoTextoContent));
-  // console.log(fila.appendChild(celdaTitle.appendChild(nodoTextoTitle)))
   // fila.appendChild(celdaContent.appendChild(nodoTextoContent));
+  // console.log(fila.appendChild(celdaTitle.appendChild(nodoTextoTitle)))
+  fila.appendChild(celdaContent.appendChild(nodoTextoContent));
 
   // nodoTextoContent.appendChild(post1);
    post1.appendChild(fila); 
-   
+  })
+}
 //  console.log(post1)
 
-  }
-}
 
 //funcion para guardar el titulo y el contenido que el usuario ingrese.
 
