@@ -47,11 +47,9 @@ body {
     background-color: rgba(156, 200, 242, 0.267);
     width: 120%;
     height: 200%;
-    color: white;
+    color: rgb(2, 1, 1);
     font-weight: bolder;
 }
-
-
 
 .button{
     width: 50%;
@@ -63,12 +61,11 @@ body {
 
 #formPost{
     width:190%;
-    
-	padding: 20%;
+    padding: 20%;
 	border-radius: 10px;
     border:1px solid #0c0c0c;
 	margin:auto;
-	background-color:rgba(243, 237, 237, 0.192);
+	background-color:rgba(183, 243, 248, 0.794);
     text-align: center;
 }
 
@@ -80,6 +77,27 @@ body {
     
 }
  .menu{
-    width: 15%;
-    
+   width: 15%;
+   background-color:rgba(196, 217, 219, 0.794);
+   position: relative;
+   left: 100%;
+     
+}
+
+#cardPost{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    /*height: 350px;*/
+    margin-bottom: 5%;
+    /*margin-right: 5%;*/
+    background: #79CDB2;
+    box-shadow: 10px 10px 4px rgba(64, 107, 94, 0.87);
+}
+
+.locationimg{
+    width:2%;
 }

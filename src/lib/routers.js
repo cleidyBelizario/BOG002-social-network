@@ -2,7 +2,7 @@ import { myMenu } from './menu.js'
 import { home } from './home.js'
 import { post } from './post.js'
 import { login } from './login.js'
-import {savePost} from './post.js'
+import {afterRender} from './post.js'
 
 // import { showPost } from './home.js'
 
@@ -24,7 +24,7 @@ const showTemplate = (route) => {
         case '#/post':
             containerRoot.innerHTML = myMenu();
             containerRoot.appendChild(post());
-            savePost();
+            afterRender();
             break
         default:
             containerRoot.innerHTML = `<h5> Pagina no encontrada </h5>`

@@ -8,161 +8,106 @@ export const post = () => {
     
     <form id="formPost" class="form">
     <img src="imagen/SqualoLogo.png" alt="" class="logoPH">
+    
     <h3> Crea tu post </h3>
     <input type="text" placeholder="Nombre de empremdimiento" id="title" class="input1 inputTittle" > 
     <input type="text" placeholder="Descripción..."  id= "content" class="input1 inputContent">
     <select id="category" class="category" name="category">
+    
                 <option value= "" disabled selected >Categorías</option>
-                <option value= "tienda" >Tienda de regalo</option>
-                <option value= "ali" >Alimento</option>
+                <option value= " tienda " > Tienda   </option>
+                <option value= " alimento " > Alimento </option>
+                <option value= " spa " >Spa</option>
         </select> 
-
+        <img src="imagen/ubi.png" alt="" class="locationimg">
     <select id="location" class="location" name="location">
+    
     <option value= "" disabled selected >Ubicación</option>
-    <option value= "bog" >Bogota</option>
-    <option value= "bq" >Barranquilla</option>
+    <option value= " bogota " > Bogota </option>
+    <option value= " barranquilla " >Barranquilla</option>
             </select> 
     <button class="button post" type="submit" id="btnPost"><b>POST</b></button>
 
     </form>
-    <table id="tblPost">
-      <thead>
-        <tr>
-          <th> Title  </th>
-          <th>Content </th>
-        </tr>
-      </thead>
-   <tbody>
-
-
-   </tbody>
-   </table>
-    
-`
+    <div id="cardPost"> </div>
+  
+    `
 divPost.innerHTML = viewPost;
 return divPost;
 
 }
-
-export function savePost(){
+//
+export function afterRender(){
 
 let botonPost = document.querySelector('#btnPost');
 botonPost.addEventListener('click', savePost )
-  let getTitle = document.querySelector('#title').value;
+function savePost(event){
+  // console.log(event)
+  event.preventDefault()
   
+  let getTitle = document.querySelector('#title').value;
   let getContent = document.querySelector('#content').value;
-  console.log(getPost(getTitle, getContent));
-  // console.log(getTitle, getContent)
-  // arrayTitle.push(getTitle);
-  // // console.log(arrayTitle)
-  // arrayContent.push(getContent);
-// title2.textContent = getTitle;
+  let getCategory = document.querySelector('#category').value;
+  let getLocation = document.querySelector('#location').value;
+ getPost(getTitle, getContent, getCategory, getLocation);
 
-localStorage.setItem('title', JSON.stringify(arrayTitle));
-localStorage.setItem('content', JSON.stringify(arrayContent));
-showPost();
-}
-
-//funcion para obtener el nombre del emprendimiento y del contenido
-let arrayTitle = [];
-let arrayContent = [];
-export function getPost(title, content) {
-  let item = {
-    title1: title,
-    content1: content,
-  }
-  arrayTitle.push(item);
-  arrayContent.push(item)
-  return item;
-}
-
-function showPost(){
-  let post1 =document.querySelector('#tblPost tbody');
-  // let title2 = document.getElementById('tittleTH');
-// console.log(post1)
-   post1.innerHTML = '';
-  let arGetTitle = JSON.parse(localStorage.getItem('title'));
-  let arGetContent = JSON.parse(localStorage.getItem('content'));
-  // let x = (arGetTitle + arGetContent)
-  // console.log(JSON.stringify(x))
-
+    if (getTitle, getContent, getCategory, getLocation == ""){
+     
+      alert("Completa los campos")
+    } else{
+      let post1 =document.querySelector('#cardPost');
+    post1.innerHTML = "POST" + '';
+   //variables para de donde nos traemos lo que esta guardado en el local storage 
+  let arGetTitle = JSON.parse(localStorage.getItem('Post'));
+  console.log(arGetTitle)
   // let nCantidadPost = arGetTitle.length;
-
   // for(let i=0; i < nCantidadPost; i++ ){
     arGetTitle.forEach(o => {
-    
       // arGetContent.forEach(e => { 
-        console.log(o);
-          // post1.innerHTML += `<div> <b>${o.title1} </b></div>`
-      //})
+     console.log(o);
+  // post1.innerHTML += `<div> <b>${o.title1} </b></div>`//})
   
-      let fila = document.createElement('tr');
-      let celdaTitle = document.createElement('td');
-      let celdaContent = document.createElement('td');
+      let fila = document.createElement('div');
+      let celdaTitle = document.createElement('h2');
+      let celdaContent = document.createElement('p');
+      let category = document.createElement('p')
+      //para darle estilos a la tarjeta 
+      fila.classList.add("fila1");
+      celdaTitle.classList.add("celdaTitle");
+      celdaContent.classList.add("celdaContent");
+      category.classList.add("category");
+
 
   let nodoTextoTitle = document.createTextNode(`${o.title1}`);
-  // console.log(nodoTextoTitle)
   let nodoTextoContent = document.createTextNode(`${o.content1}`);
+  let nodoTextoCategory = document.createTextNode(` ${o.category1}`);
+  let nodoTextoLocation = document.createTextNode(`${o.location1}`);
+  // console.log(nodoTextoTitle)
+  
   // title2.textContent = 
-
   fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
-  // fila.appendChild(celdaContent.appendChild(nodoTextoContent));
-  // console.log(fila.appendChild(celdaTitle.appendChild(nodoTextoTitle)))
   fila.appendChild(celdaContent.appendChild(nodoTextoContent));
-
+  fila.appendChild(category.appendChild(nodoTextoCategory));
+  fila.appendChild(category.appendChild(nodoTextoLocation));
   // nodoTextoContent.appendChild(post1);
    post1.appendChild(fila); 
   })
 }
-//  console.log(post1)
+}
+}
+//funcion para obtener el nombre del emprendimiento y del contenido
 
-
-//funcion para guardar el titulo y el contenido que el usuario ingrese.
-
-// export  function guardarboton (){
-// let botonPost = document.querySelector('#btnPost');
-// botonPost.addEventListener('click', async ()=>{
-//   let getTitle = document.querySelector('#title').value;
+//variables para guardar el array de lo que el usuario escriba 
+let arrayPost = [];
+export function getPost(title, content, category, location) {
+  let item = {
+    title1: title,
+    content1: content,
+    category1: category,
+    location1:location,
+  }
+  arrayPost.push(item);
   
-//   let getContent = document.querySelector('#content').value;
-//   // console.log(getTitle, getContent)
-//   arrayTitle.push(getTitle);
-//   // console.log(arrayTitle)
-//   arrayContent.push(getContent);
-// // title2.textContent = getTitle;
+localStorage.setItem('Post', JSON.stringify(arrayPost));
+}
 
-// localStorage.setItem('title', JSON.stringify(arrayTitle));
-// localStorage.setItem('content', JSON.stringify(arrayContent));
-// await savePost();
-// });
-// }
-
-// let arrayTitle = [];
-// let arrayContent = [];
-// export function savePost(title, content) {
-
-
-//   let titleContentItem = {
-//     title1: title,
-//     content1: content,
-//     }
-    
-//   arrayTitle.push(titleContentItem.title1);
-//   console.log(arrayTitle)
-//   arrayContent.push(titleContentItem.content1);
-//   return (titleContentItem )
-// }
-//console.log(savePost("peluqueria", "emprendimiento"))
-
-// let arrayTitle = [];
-// let arrayContent = [];
-
-// let botonPost = document.querySelector('#btnPost');
-// botonPost.addEventListener('click', async ()=>{
-//   let getTitle = document.querySelector('#title').value;
-  
-
-
-
-
-  
