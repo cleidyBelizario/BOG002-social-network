@@ -5,21 +5,15 @@ import { myFunction } from './lib/index.js';
 import { myMenu } from './lib/menu.js';
 import { showTemplate } from './lib/routers.js';
 
-
 const iniciar = () => {
-    showTemplate(window.location.hash);
+  showTemplate(window.location.hash);
 
-    // document.getElementById("router").innerHTML = myMenu();
+  // document.getElementById("router").innerHTML = myMenu();
 
-    window.addEventListener('hashchange', ()=> {
+  window.addEventListener('hashchange', () => {
     myFunction();
     console.log(window.location.hash);
     showTemplate(window.location.hash);
-    })
-}
+  });
+};
 window.addEventListener('load', iniciar);
-
-
-
-
-

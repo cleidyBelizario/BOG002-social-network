@@ -1,6 +1,5 @@
-
 export const myMenu = () => {
-    const viewMenu = `
+  const viewMenu = `
         <footer
         <nav>
     <ul>
@@ -17,6 +16,6 @@ export const myMenu = () => {
         </ul>  
         </nav>
     </footer>
-    `
-    return viewMenu;
-    };  
+    `;
+  return viewMenu;
+};

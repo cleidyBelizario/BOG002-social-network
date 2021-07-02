@@ -94,10 +94,12 @@ body {
     /*height: 350px;*/
     margin-bottom: 5%;
     /*margin-right: 5%;*/
+    background-color: violet;
+}
+.fila1{
     background: #79CDB2;
     box-shadow: 10px 10px 4px rgba(64, 107, 94, 0.87);
 }
-
 .locationimg{
     width:2%;
 }
