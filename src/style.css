@@ -65,12 +65,11 @@ body {
 
 #formPost{
     width:190%;
-    
-	padding: 20%;
+    padding: 20%;
 	border-radius: 10px;
     border:1px solid #0c0c0c;
 	margin:auto;
-	background-color:rgba(243, 237, 237, 0.192);
+	background-color:rgba(188, 244, 246, 0.986);
     text-align: center;
 }
 
