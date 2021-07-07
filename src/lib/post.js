@@ -1,126 +1,137 @@
 export const post = () => {
-  const divPost = document.createElement("div");
+  const divPost = document.createElement('div');
 
   const viewPost = `
   <section>
     
     <form id="formPost" class="form">
     <img src="imagen/SqualoLogo.png" alt="" class="logoPH">
+    
     <h3> Crea tu post </h3>
     <input type="text" placeholder="Nombre de empremdimiento" id="title" class="input1 inputTittle" > 
     <input type="text" placeholder="Descripción..."  id= "content" class="input1 inputContent">
     <select id="category" class="category" name="category">
-                <option value= "" disabled selected >Categorías</option>
-                <option value= "tienda"> Tienda de regalo</option>
-                <option value= "ali" >Alimento</option>
-        </select> 
-    <select id="location" class="location" name="location">
-    <option value= "" disabled selected >Ubicación</option>
-    <option value= "bog" >Bogota</option>
-    <option value= "bq" >Barranquilla</option>
+    
+        <option value= "" disabled selected >Categorías</option>
+        <option value= " tienda " > Tienda   </option>
+        <option value= " alimento " > Alimento </option>
+        <option value= " spa " >Spa</option>
             </select> 
-    <button class="button post" type="submit" id="btnPost"> <b>POST</b></button>
-</form>
-</section>
+        <img src="imagen/ubi.png" alt="" class="locationimg">
+    <select id="location" class="location" name="location">
+    
+        <option value= "" disabled selected >Ubicación</option>
+        <option value= " bogota " > Bogota </option>
+        <option value= " barranquilla " >Barranquilla</option>
+            </select> 
+    <button class="button post" type="submit" id="btnPost"><b>POST</b></button>
 
-<p id=parrafo> </p>
-    `
+    </form>
+    <div id="cardPost"> </div>
+  
+    `;
   divPost.innerHTML = viewPost;
   return divPost;
+};
+
+
+export function afterRender() {
+  let dataPost21 = JSON.parse(localStorage.getItem('Post'))
+  let botonPost = document.querySelector('#btnPost')
+  botonPost.addEventListener('click', () => {
+
+  const titlePost = document.querySelector('#title').value;
+  const contentPost = document.querySelector('#content').value;
+  const categoryPost = document.querySelector('#category').value;
+  const locationPost = document.querySelector('#location').value;
+
+savePostLS(titlePost, contentPost, categoryPost, locationPost);
+printPost(dataPost21)
+})
+}
+
+function ObtenerPost() {
+  let dataPost = JSON.parse(localStorage.getItem('Post'))
+
+  console.log("funciona")
+  if (dataPost === null) {
+    console.log(':( no')
+  } else {
+    console.log('si hay post')
+  }
+  /*}else{
+    document.getElementById('cardPost').innerHTML = 'No hay Post en el momento';
+  }*/
+  /* if (titlePost, contentPost, categoryPost, locationPost == ''){    
+     document.getElementById('cardPost').innerHTML = pintarLodelLocal;
+     }else { 
+     localStorage.setItem('Post', JSON.stringify(arrayPost));
+     savePostLS(titlePost, contentPost, categoryPost, locationPost);
+     paintPost()*/
 }
 
 
-//funcion para guardar el titulo y el contenido que el usuario ingrese a traves de un evento .
-export function afterRender(){
-  let botonPost = document.querySelector('#btnPost');
-  botonPost.addEventListener('click', savePost )
-  function savePost(event){
-    // console.log(event)
-    event.preventDefault()
-    let getTitle = document.querySelector('#title').value;
-    let getContent = document.querySelector('#content').value;
-    let getCategory = document.querySelector('#category').value;
-    let getLocation = document.querySelector('#location').value;
-   getPost(getTitle, getContent, getCategory, getLocation);
-      if (getTitle, getContent, getCategory, getLocation == ""){
-        alert("Completa los campos")
-      } else{
-        let post1 =document.querySelector('#tblPost tbody');
-      post1.innerHTML = '';
-     //variables para de donde nos traemos lo que esta guardado en el local storage 
-    let arrayPost = JSON.parse(localStorage.getItem('Post'));
-    console.log(arGetTitle)
-    // let nCantidadPost = arGetTitle.length;
-    // for(let i=0; i < nCantidadPost; i++ ){
-      arrayPost.forEach(o => {
-        // arGetContent.forEach(e => { 
-       console.log(o);
-    // post1.innerHTML += `<div> <b>${o.title1} </b></div>`//})
-        let fila = document.createElement('div');
-        let celdaTitle = document.createElement('h2');
-        let celdaContent = document.createElement('p');
-        let category = document.createElement('p')
-    let nodoTextoTitle = document.createTextNode(`${o.title1}`);
-    let nodoTextoContent = document.createTextNode(`${o.content1}`);
-    let nodoTextoCategory = document.createTextNode(` ${o.category1}`);
-    let nodoTextoLocation = document.createTextNode(`${o.location1}`);
-    // console.log(nodoTextoTitle)
-    // title2.textContent = 
-    fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
-    fila.appendChild(celdaContent.appendChild(nodoTextoContent));
-    fila.appendChild(category.appendChild(nodoTextoCategory));
-    fila.appendChild(category.appendChild(nodoTextoLocation));
-    // nodoTextoContent.appendChild(post1);
-     post1.appendChild(fila); 
-    })
-  }
-  }
-  }
-  //funcion para obtener el nombre del emprendimiento y del contenido
-  //variables para guardar el array de lo que el usuario escriba 
-  let arrayPost = [];
-  export function getPost(title, content, category, location) {
-    let item = {
-      title1: title,
-      content1: content,
-      category1: category,
-      location1:location,
-    }
-    arrayPost.push(item);
+// funcion para obtener el nombre del emprendimiento y del contenido
+
+// variables para guardar el array de lo que el usuario escriba
+let arrayPost = [];
+export function savePostLS(title, content, category, location) {
+  const item = {
+    title1: title,
+    content1: content,
+    category1: category,
+    location1: location,
+  };
+  arrayPost.push(item);
   localStorage.setItem('Post', JSON.stringify(arrayPost));
-  }
-  //funcion para pintar la linea 
-  /*function showPost(){
-    let post1 =document.querySelector('#tblPost tbody');
-     post1.innerHTML = '';
-     //variables para de donde nos traemos lo que esta guardado en el local storage 
-    let arGetTitle = JSON.parse(localStorage.getItem('Post'));
-    console.log(arGetTitle)
-    // let nCantidadPost = arGetTitle.length;
-    // for(let i=0; i < nCantidadPost; i++ ){
-      arGetTitle.forEach(o => {
-        // arGetContent.forEach(e => { 
-          console.log(o);
-            // post1.innerHTML += `<div> <b>${o.title1} </b></div>`
-        //})
-        let fila = document.createElement('div');
-        let celdaTitle = document.createElement('h2');
-        let celdaContent = document.createElement('p');
-        let category = document.createElement('p')
-    let nodoTextoTitle = document.createTextNode(`${o.title1}`);
-      let nodoTextoCategory = document.createTextNode(`${o.category1}`);
-      let nodoTextoLocation = document.createTextNode(`${o.location1}`);
+  printPost()
+}
+
+export function printPost(arrayPost1) {
+
+  arrayPost1.forEach((o) => {
+    // console.log(arGetTitle)
+    const container = document.createElement('div');
+    const celdaTitle = document.createElement('h2');
+    const celdaContent = document.createElement('p');
+    const categoryLocation = document.createElement('p');
+    let deleteFila = document.createElement('img')
+    // para darle estilos a la tarjeta
+    container.classList.add('fila1');
+    celdaTitle.classList.add('celdaTitle');
+    celdaContent.classList.add('celdaContent');
+    categoryLocation.classList.add('category');
+
+    const nodoTextoTitle = document.createTextNode(`${o.title1}`);
+    const nodoTextoContent = document.createTextNode(`${o.content1}`);
+    const nodoTextoCategory = document.createTextNode(`${o.category1}`);
+    const nodoTextoLocation = document.createTextNode(`${o.location1} `);
+    deleteFila.setAttribute("src", "/imagen/delete.png ");
     // console.log(nodoTextoTitle)
-    let nodoTextoContent = document.createTextNode(`${o.content1}`);
-    // title2.textContent = 
-    fila.appendChild(celdaTitle.appendChild(nodoTextoTitle));
-    fila.appendChild(category.appendChild(nodoTextoCategory));
-    fila.appendChild(category.appendChild(nodoTextoLocation));
-    fila.appendChild(celdaContent.appendChild(nodoTextoContent));
+
+    celdaTitle.appendChild(nodoTextoTitle);
+    celdaContent.appendChild(nodoTextoContent);
+    categoryLocation.appendChild(nodoTextoCategory);
+    categoryLocation.appendChild(nodoTextoLocation);
+
+    container.appendChild(celdaTitle);
+    container.appendChild(celdaContent);
+    container.appendChild(categoryLocation);
+    container.appendChild(categoryLocation);
+    container.appendChild(deleteFila)
     // nodoTextoContent.appendChild(post1);
-  post1.appendChild(fila); 
-    })
-  }
-  */
-  
-  
+
+    listPost.appendChild(container);
+
+  });
+}
+
+//funcion para capturar la tarjeta y poder eliminar 
+/*export const cardPost = () => {
+let miCard = document.querySelector('#cardPost');
+miCard.addEventListener('click', (e) => {
+
+  e.preventDefault();
+console.log(e);
+});
+}*/
