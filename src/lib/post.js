@@ -34,21 +34,34 @@ export const post = () => {
   return divPost;
 };
 
-
+//funcion para cuando le demos click al boton de post, muestre la funcion de imprimir el post y lo que el usuario escriba en cada imput del formulario  
 export function afterRender() {
-  let dataPost21 = JSON.parse(localStorage.getItem('Post'))
+  
+  let pintarLodelLocal = JSON.parse(localStorage.getItem('Post'));
   let botonPost = document.querySelector('#btnPost')
-  botonPost.addEventListener('click', () => {
+  botonPost.addEventListener('click', (e) => {
+    e.preventDefault();
+    const titlePost = document.querySelector('#title').value;
+    const contentPost = document.querySelector('#content').value;
+    const categoryPost = document.querySelector('#category').value;
+    const locationPost = document.querySelector('#location').value;
 
-  const titlePost = document.querySelector('#title').value;
-  const contentPost = document.querySelector('#content').value;
-  const categoryPost = document.querySelector('#category').value;
-  const locationPost = document.querySelector('#location').value;
-
-savePostLS(titlePost, contentPost, categoryPost, locationPost);
-printPost(dataPost21)
-})
+    if (titlePost, contentPost, categoryPost, locationPost == ''){    
+      document.getElementById('cardPost').innerHTML ='llenas los campos ';
+    } else { 
+      document.getElementById('cardPost').innerHTML = localStorage.setItem('Post', JSON.stringify(arrayPost));
+      savePostLS(titlePost, contentPost, categoryPost, locationPost);
+      printPost(pintarLodelLocal)
+      
+    };
+  })
 }
+// funcion para conseguir los datos que estan almacenado en el localStorage
+document.addEventListener('DOMContentLoaded', () => {
+
+setTimeout(function(){ ObtenerPost(); }, 1000)})
+
+let arrayPost = [];
 
 function ObtenerPost() {
   let dataPost = JSON.parse(localStorage.getItem('Post'))
@@ -57,25 +70,14 @@ function ObtenerPost() {
   if (dataPost === null) {
     console.log(':( no')
   } else {
-    console.log('si hay post')
-  }
-  /*}else{
-    document.getElementById('cardPost').innerHTML = 'No hay Post en el momento';
-  }*/
-  /* if (titlePost, contentPost, categoryPost, locationPost == ''){    
-     document.getElementById('cardPost').innerHTML = pintarLodelLocal;
-     }else { 
-     localStorage.setItem('Post', JSON.stringify(arrayPost));
-     savePostLS(titlePost, contentPost, categoryPost, locationPost);
-     paintPost()*/
+    arrayPost = dataPost
+    printPost(dataPost)
+    }
 }
 
+// funcion para guardar el array de datos en el localStorage de lo que el usuario escriba
 
-// funcion para obtener el nombre del emprendimiento y del contenido
-
-// variables para guardar el array de lo que el usuario escriba
-let arrayPost = [];
-export function savePostLS(title, content, category, location) {
+function savePostLS(title, content, category, location) {
   const item = {
     title1: title,
     content1: content,
@@ -84,48 +86,50 @@ export function savePostLS(title, content, category, location) {
   };
   arrayPost.push(item);
   localStorage.setItem('Post', JSON.stringify(arrayPost));
-  printPost()
+//printPost(arrayPost)
 }
 
-export function printPost(arrayPost1) {
+function printPost(arrayPost1) {
 
   arrayPost1.forEach((o) => {
-    // console.log(arGetTitle)
+    console.log('arrayPost1', arrayPost1)
+
     const container = document.createElement('div');
-    const celdaTitle = document.createElement('h2');
-    const celdaContent = document.createElement('p');
+    const titleH2 = document.createElement('h2');
+    const contentP = document.createElement('p');
     const categoryLocation = document.createElement('p');
-    let deleteFila = document.createElement('img')
     // para darle estilos a la tarjeta
-    container.classList.add('fila1');
-    celdaTitle.classList.add('celdaTitle');
-    celdaContent.classList.add('celdaContent');
-    categoryLocation.classList.add('category');
+    container.classList.add('containerStyle');
+    titleH2.classList.add('titleStyle');
+    contentP.classList.add('contentStyle');
+    categoryLocation.classList.add('categoryLocationStyle');
 
     const nodoTextoTitle = document.createTextNode(`${o.title1}`);
     const nodoTextoContent = document.createTextNode(`${o.content1}`);
-    const nodoTextoCategory = document.createTextNode(`${o.category1}`);
-    const nodoTextoLocation = document.createTextNode(`${o.location1} `);
-    deleteFila.setAttribute("src", "/imagen/delete.png ");
+    const nodoTextoCategory = document.createTextNode(` ${o.category1}`);
+    const nodoTextoLocation = document.createTextNode(`${o.location1}`);
     // console.log(nodoTextoTitle)
 
-    celdaTitle.appendChild(nodoTextoTitle);
-    celdaContent.appendChild(nodoTextoContent);
+    // title2.textContent =
+    titleH2.appendChild(nodoTextoTitle);
+    contentP.appendChild(nodoTextoContent);
     categoryLocation.appendChild(nodoTextoCategory);
     categoryLocation.appendChild(nodoTextoLocation);
 
-    container.appendChild(celdaTitle);
-    container.appendChild(celdaContent);
+    container.appendChild(titleH2);
+    container.appendChild(contentP);
     container.appendChild(categoryLocation);
     container.appendChild(categoryLocation);
-    container.appendChild(deleteFila)
-    // nodoTextoContent.appendChild(post1);
 
-    listPost.appendChild(container);
-
+    const post1 = document.querySelector('#cardPost');
+    //post1.innerText ='';
+    if(post1 != null){ 
+    console.log('no hay nada en el post')
+    post1.appendChild(container);
+  }
   });
-}
 
+}
 //funcion para capturar la tarjeta y poder eliminar 
 /*export const cardPost = () => {
 let miCard = document.querySelector('#cardPost');
