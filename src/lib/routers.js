@@ -1,6 +1,6 @@
 import { myMenu } from './menu.js';
 import { home } from './home.js';
-import { post, afterRender } from './post.js';
+import { post, afterRender, cardPost} from './post.js';
 import { login, prueba } from './login.js';
 
 // import { showPost } from './home.js'
@@ -22,7 +22,7 @@ const showTemplate = (route) => {
       containerRoot.innerHTML = myMenu();
       containerRoot.appendChild(post());
       afterRender();
-      
+      cardPost()
       break;
     default:
       containerRoot.innerHTML = `<img src="imagen/error404.jpg" alt="" class="error404">`;

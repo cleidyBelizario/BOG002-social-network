@@ -36,8 +36,7 @@ export const post = () => {
 
 //funcion para cuando le demos click al boton de post, muestre la funcion de imprimir el post y lo que el usuario escriba en cada imput del formulario  
 export function afterRender() {
-  
-  let pintarLodelLocal = JSON.parse(localStorage.getItem('Post'));
+
   let botonPost = document.querySelector('#btnPost')
   botonPost.addEventListener('click', (e) => {
     e.preventDefault();
@@ -46,20 +45,20 @@ export function afterRender() {
     const categoryPost = document.querySelector('#category').value;
     const locationPost = document.querySelector('#location').value;
 
-    if (titlePost, contentPost, categoryPost, locationPost == ''){    
-      document.getElementById('cardPost').innerHTML ='llenas los campos ';
-    } else { 
-      document.getElementById('cardPost').innerHTML = localStorage.setItem('Post', JSON.stringify(arrayPost));
+
+    if (titlePost, contentPost, categoryPost, locationPost == '') {
+      document.getElementById('cardPost').innerHTML = 'llenar los campos ';
+    } else {
       savePostLS(titlePost, contentPost, categoryPost, locationPost);
-      printPost(pintarLodelLocal)
-      
+      //printPost(variablePrueba)
     };
   })
 }
 // funcion para conseguir los datos que estan almacenado en el localStorage
 document.addEventListener('DOMContentLoaded', () => {
 
-setTimeout(function(){ ObtenerPost(); }, 1000)})
+  setTimeout(function () { ObtenerPost(); }, 1000)
+})
 
 let arrayPost = [];
 
@@ -72,7 +71,8 @@ function ObtenerPost() {
   } else {
     arrayPost = dataPost
     printPost(dataPost)
-    }
+    
+  }
 }
 
 // funcion para guardar el array de datos en el localStorage de lo que el usuario escriba
@@ -86,56 +86,60 @@ function savePostLS(title, content, category, location) {
   };
   arrayPost.push(item);
   localStorage.setItem('Post', JSON.stringify(arrayPost));
-//printPost(arrayPost)
+  printPost(arrayPost)
 }
 
-function printPost(arrayPost1) {
+export function printPost(arrayPost1) {
 
-  arrayPost1.forEach((o) => {
-    console.log('arrayPost1', arrayPost1)
+  const post1 = document.querySelector('#cardPost');
+  post1.innerHTML = '';
+  if (post1 != null) {
+      console.log('no hay nada en el post')
+    arrayPost1.forEach((o) => {
+      //console.log('arrayPost1', arrayPost1)
 
-    const container = document.createElement('div');
-    const titleH2 = document.createElement('h2');
-    const contentP = document.createElement('p');
-    const categoryLocation = document.createElement('p');
-    // para darle estilos a la tarjeta
-    container.classList.add('containerStyle');
-    titleH2.classList.add('titleStyle');
-    contentP.classList.add('contentStyle');
-    categoryLocation.classList.add('categoryLocationStyle');
+      const container = document.createElement('div');
+      const titleH2 = document.createElement('h2');
+      const contentP = document.createElement('p');
+      const categoryLocation = document.createElement('p');
+      const deleteContainer = document.createElement('img')
+      // para darle estilos a la tarjeta
+      container.classList.add('containerStyle');
+      titleH2.classList.add('titleStyle');
+      contentP.classList.add('contentStyle');
+      categoryLocation.classList.add('categoryLocationStyle');
 
-    const nodoTextoTitle = document.createTextNode(`${o.title1}`);
-    const nodoTextoContent = document.createTextNode(`${o.content1}`);
-    const nodoTextoCategory = document.createTextNode(` ${o.category1}`);
-    const nodoTextoLocation = document.createTextNode(`${o.location1}`);
-    // console.log(nodoTextoTitle)
+      const nodoTextoTitle = document.createTextNode(`${o.title1}`);
+      const nodoTextoContent = document.createTextNode(`${o.content1}`);
+      const nodoTextoCategory = document.createTextNode(` ${o.category1}`);
+      const nodoTextoLocation = document.createTextNode(`${o.location1}`);
+      deleteContainer.setAttribute("src", 'imagen/delete.png');
+      // console.log(nodoTextoTitle)
 
-    // title2.textContent =
-    titleH2.appendChild(nodoTextoTitle);
-    contentP.appendChild(nodoTextoContent);
-    categoryLocation.appendChild(nodoTextoCategory);
-    categoryLocation.appendChild(nodoTextoLocation);
+      // title2.textContent =
+      titleH2.appendChild(nodoTextoTitle);
+      contentP.appendChild(nodoTextoContent);
+      categoryLocation.appendChild(nodoTextoCategory);
+      categoryLocation.appendChild(nodoTextoLocation);
 
-    container.appendChild(titleH2);
-    container.appendChild(contentP);
-    container.appendChild(categoryLocation);
-    container.appendChild(categoryLocation);
+      container.appendChild(titleH2);
+      container.appendChild(contentP);
+      container.appendChild(categoryLocation);
+      container.appendChild(categoryLocation);
+      container.appendChild(deleteContainer);
 
-    const post1 = document.querySelector('#cardPost');
-    //post1.innerText ='';
-    if(post1 != null){ 
-    console.log('no hay nada en el post')
-    post1.appendChild(container);
+      post1.appendChild(container);
+
+    })
   }
-  });
-
 }
-//funcion para capturar la tarjeta y poder eliminar 
-/*export const cardPost = () => {
-let miCard = document.querySelector('#cardPost');
-miCard.addEventListener('click', (e) => {
 
-  e.preventDefault();
-console.log(e);
-});
-}*/
+//funcion para capturar la tarjeta y poder eliminar 
+export const cardPost = () => {
+  let miCard = document.querySelector('#cardPost');
+  miCard.addEventListener('click', (e) => {
+
+    e.preventDefault();
+    console.log(e);
+  });
+}
