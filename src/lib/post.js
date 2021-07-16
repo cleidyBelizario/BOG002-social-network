@@ -63,21 +63,18 @@ let arrayPost = [];
 
 function ObtenerPost() {
   let dataPost = JSON.parse(localStorage.getItem('Post'))
-
-  console.log("funciona")
+  //console.log("funciona")
   if (dataPost === null) {
-    console.log(':( no')
+    document.getElementById('cardPost').innerHTML = 'NO HAY POST';
   } else {
     arrayPost = dataPost
     printPost(dataPost)
-    
   }
 }
 
 // funcion para guardar el array de datos en el localStorage de lo que el usuario escriba
-
 function savePostLS(title, content, category, location) {
-  const item = {
+  const item ={
     title1: title,
     content1: content,
     category1: category,
@@ -93,12 +90,11 @@ export function printPost(arrayPost1) {
   const post1 = document.querySelector('#cardPost');
   post1.innerHTML = '';
   if (post1 != null) {
-      console.log('no hay nada en el post')
-      for (let i = 0; i < arrayPost1.length ; i++) {
-      //console.log(i)
-      // arrayPost1.forEach((o) => {
+    document.getElementById('cardPost').innerHTML = 'POST';
+      for (let i = 0; i < arrayPost1.length; i++) {
+        // arrayPost1.forEach((o) => {
         const container = document.createElement('div');
-        container.setAttribute('posicionid', container[i])
+        container.setAttribute('posicionid', [i])
         const titleH2 = document.createElement('h2');
         const contentP = document.createElement('p');
         const categoryLocation = document.createElement('p');
@@ -116,6 +112,7 @@ export function printPost(arrayPost1) {
         titleH2.classList.add('titleStyle');
         contentP.classList.add('contentStyle');
         categoryLocation.classList.add('categoryLocationStyle');
+        deletebtn.classList.add('deleteStyle');
         //editBtn.classList.add('editBtnStyle');
         const nodoTextoTitle = document.createTextNode(arrayPost1[i]["title1"]);
         const nodoTextoContent = document.createTextNode(arrayPost1[i]["content1"]);
@@ -143,85 +140,33 @@ export function printPost(arrayPost1) {
       }
     }
   }
-  //funcion para capturar la tarjeta y poder eliminar 
-  // export const cardPost = () => {
-  //   let miCard = document.querySelector('#cardPost');
-  //   miCard.addEventListener('click', (e) => {
-  //     e.preventDefault();
-  //     console.log(e);
-  //   });
-  // }
-  //funcion para modificar
-  // let dataPost = JSON.parse(localStorage.getItem('Post'))
-  // if (dataPost === null) {
-  // }
-  // let id = getUrlVars()["id"],
-  //     titleE = title1[id],
-  //     contentE = content1[id],
-  //     categoryE = category1[id],
-  //     locationE = location1[id],
-  //     btnPostedit = document.querySelector('#editBtn');
-  //     document.querySelector('#title').value = titleE;
-  //     document.querySelector('#content').value = contentE;
-  //     document.querySelector('#category').value = categoryE;
-  //     document.querySelector('#location').value = locationE;
-      // btnPostedit.addEventListener('click', editar);
-  // function editar(){
-  //       title =  document.querySelector('#title').value 
-  //       content = document.querySelector('#content').value 
-  //       category = document.querySelector('#category').value
-  //       location =document.querySelector('#location').value 
-  // }
-  // function getUrlVars() {
-  //   let vars = {};
-  //       parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-  //       vars[key] = value;
-  //   });
-  //   return vars;
-  // }
-  // }
   
- 
 //funcion para capturar la tarjeta y poder eliminar 
 export const cardPost = () => {
   let miCard = document.querySelector('#cardPost');
   miCard.addEventListener('click', (e) => {
+    console.log(e)
     e.preventDefault();
-
-    // for (let i = 0; i < arrayPost.length ; i++) {
-    //   console.log(i)
-      //console.log(e.target)
-    let tarjeta = e.target.innerHTML;
-    if(tarjeta === 'editar' || tarjeta === 'delete'){
-    let dataEliminar = e.path[1].childNodes[0].innerHTML;
-    //console.log(tarjeta)
-     //console.log(dataEditar)
-      if(e.target.innerHTML === 'delete'){
-      EliminarPost(dataEliminar)
-      printPost(arrayPost)
-      }
-      /*if(e.target.innerHTML === 'editar'){
-        //console.log(dataEditar)
-        EditarPost(dataEditar)
-        printPost(arrayPost)*/
-
+      let tarjeta = e.target.parentNode;
+      console.log(tarjeta.getAttribute('posicionid'))
+    if(e.target.innerHTML === 'delete'){
+      // Accción de eliminar
+      EliminarPost(tarjeta.getAttribute('posicionid'));
     }
-//}
-})
+    
+  })  
 }
 
+//funcion para eliminar datos de un array segun su posicion.
 function EliminarPost (postId){
-  for (let i = 0; i < arrayPost.length ; i++) {
-  //console.log(postId)
+  
   let dataPostEliminar = JSON.parse(localStorage.getItem('Post'));
-  let posicionid = dataPostEliminar.findIndex(element => element.postId === postId);
-  dataPostEliminar.splice(i, 1)
+  dataPostEliminar.splice(postId, 1)
+  //convierto el objeto en un JSON
   let dataJSON = JSON.stringify(dataPostEliminar);
+  //guardo mis datos en un JSON nuevamente 
   localStorage.setItem('Post', dataJSON);
-  printPost(postId)
-  // afterRender()
- 
-  }
+  ObtenerPost()
   };
 
 
