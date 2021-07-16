@@ -93,6 +93,8 @@ body {
 display: grid;
 grid-template-columns: auto auto auto;
 width: 200%;
+position: sticky;
+top: 0;
 }
 .menuCambios{
     flex-direction: row;

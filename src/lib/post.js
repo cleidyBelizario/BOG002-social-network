@@ -45,7 +45,6 @@ export function afterRender() {
     const categoryPost = document.querySelector('#category').value;
     const locationPost = document.querySelector('#location').value;
 
-
     if (titlePost, contentPost, categoryPost, locationPost == '') {
       document.getElementById('cardPost').innerHTML = 'llenar los campos ';
     } else {
@@ -95,51 +94,153 @@ export function printPost(arrayPost1) {
   post1.innerHTML = '';
   if (post1 != null) {
       console.log('no hay nada en el post')
-    arrayPost1.forEach((o) => {
-      //console.log('arrayPost1', arrayPost1)
-
-      const container = document.createElement('div');
-      const titleH2 = document.createElement('h2');
-      const contentP = document.createElement('p');
-      const categoryLocation = document.createElement('p');
-      const deleteContainer = document.createElement('img')
-      // para darle estilos a la tarjeta
-      container.classList.add('containerStyle');
-      titleH2.classList.add('titleStyle');
-      contentP.classList.add('contentStyle');
-      categoryLocation.classList.add('categoryLocationStyle');
-
-      const nodoTextoTitle = document.createTextNode(`${o.title1}`);
-      const nodoTextoContent = document.createTextNode(`${o.content1}`);
-      const nodoTextoCategory = document.createTextNode(` ${o.category1}`);
-      const nodoTextoLocation = document.createTextNode(`${o.location1}`);
-      deleteContainer.setAttribute("src", 'imagen/delete.png');
-      // console.log(nodoTextoTitle)
-
-      // title2.textContent =
-      titleH2.appendChild(nodoTextoTitle);
-      contentP.appendChild(nodoTextoContent);
-      categoryLocation.appendChild(nodoTextoCategory);
-      categoryLocation.appendChild(nodoTextoLocation);
-
-      container.appendChild(titleH2);
-      container.appendChild(contentP);
-      container.appendChild(categoryLocation);
-      container.appendChild(categoryLocation);
-      container.appendChild(deleteContainer);
-
-      post1.appendChild(container);
-
-    })
+      for (let i = 0; i < arrayPost1.length ; i++) {
+      //console.log(i)
+      // arrayPost1.forEach((o) => {
+        const container = document.createElement('div');
+        container.setAttribute('posicionid', container[i])
+        const titleH2 = document.createElement('h2');
+        const contentP = document.createElement('p');
+        const categoryLocation = document.createElement('p');
+        const editarBtn = document.createElement("button");
+        const deletebtn = document.createElement("button");
+        //let updateEdit = document.createElement('td');
+        //let editBtn = document.createElement('a');
+        //updateEdit.setAttribute('class', 'btnEdit');
+        //updateEdit.setAttribute('id', i)  
+        //editBtn.href = '#/home?id' + '=' + i;
+        // updateButton.setAtrribute('id', i)
+        // const edit = document.createElement('button')
+        // para darle estilos a la tarjeta
+        container.classList.add('containerStyle');
+        titleH2.classList.add('titleStyle');
+        contentP.classList.add('contentStyle');
+        categoryLocation.classList.add('categoryLocationStyle');
+        //editBtn.classList.add('editBtnStyle');
+        const nodoTextoTitle = document.createTextNode(arrayPost1[i]["title1"]);
+        const nodoTextoContent = document.createTextNode(arrayPost1[i]["content1"]);
+        const nodoTextoCategory = document.createTextNode(arrayPost1[i]["category1"]);
+        const nodoTextoLocation = document.createTextNode(arrayPost1[i]["location1"]);
+        editarBtn.textContent = 'Editar'
+        deletebtn.textContent = 'delete'
+        //editBtn.innerHTML = `<img src="imagen/editar.png" class="editStyle" id="editBtn" >`;
+        // edit.innerHTML = ("src", 'imagen/editar.png');
+        // console.log(nodoTextoTitle)
+        // title2.textContent =
+        titleH2.appendChild(nodoTextoTitle);
+        contentP.appendChild(nodoTextoContent);
+        categoryLocation.appendChild(nodoTextoCategory);
+        categoryLocation.appendChild(nodoTextoLocation);
+        //updateEdit.appendChild(editBtn);
+        container.appendChild(titleH2);
+        container.appendChild(contentP);
+        container.appendChild(categoryLocation);
+        container.appendChild(categoryLocation);
+        container.appendChild(editarBtn);
+        container.appendChild(deletebtn);
+        // container.appendChild(edit);
+        post1.appendChild(container);
+      }
+    }
   }
-}
-
+  //funcion para capturar la tarjeta y poder eliminar 
+  // export const cardPost = () => {
+  //   let miCard = document.querySelector('#cardPost');
+  //   miCard.addEventListener('click', (e) => {
+  //     e.preventDefault();
+  //     console.log(e);
+  //   });
+  // }
+  //funcion para modificar
+  // let dataPost = JSON.parse(localStorage.getItem('Post'))
+  // if (dataPost === null) {
+  // }
+  // let id = getUrlVars()["id"],
+  //     titleE = title1[id],
+  //     contentE = content1[id],
+  //     categoryE = category1[id],
+  //     locationE = location1[id],
+  //     btnPostedit = document.querySelector('#editBtn');
+  //     document.querySelector('#title').value = titleE;
+  //     document.querySelector('#content').value = contentE;
+  //     document.querySelector('#category').value = categoryE;
+  //     document.querySelector('#location').value = locationE;
+      // btnPostedit.addEventListener('click', editar);
+  // function editar(){
+  //       title =  document.querySelector('#title').value 
+  //       content = document.querySelector('#content').value 
+  //       category = document.querySelector('#category').value
+  //       location =document.querySelector('#location').value 
+  // }
+  // function getUrlVars() {
+  //   let vars = {};
+  //       parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+  //       vars[key] = value;
+  //   });
+  //   return vars;
+  // }
+  // }
+  
+ 
 //funcion para capturar la tarjeta y poder eliminar 
 export const cardPost = () => {
   let miCard = document.querySelector('#cardPost');
   miCard.addEventListener('click', (e) => {
-
     e.preventDefault();
-    console.log(e);
-  });
+
+    // for (let i = 0; i < arrayPost.length ; i++) {
+    //   console.log(i)
+      //console.log(e.target)
+    let tarjeta = e.target.innerHTML;
+    if(tarjeta === 'editar' || tarjeta === 'delete'){
+    let dataEliminar = e.path[1].childNodes[0].innerHTML;
+    //console.log(tarjeta)
+     //console.log(dataEditar)
+      if(e.target.innerHTML === 'delete'){
+      EliminarPost(dataEliminar)
+      printPost(arrayPost)
+      }
+      /*if(e.target.innerHTML === 'editar'){
+        //console.log(dataEditar)
+        EditarPost(dataEditar)
+        printPost(arrayPost)*/
+
+    }
+//}
+})
 }
+
+function EliminarPost (postId){
+  for (let i = 0; i < arrayPost.length ; i++) {
+  //console.log(postId)
+  let dataPostEliminar = JSON.parse(localStorage.getItem('Post'));
+  let posicionid = dataPostEliminar.findIndex(element => element.postId === postId);
+  dataPostEliminar.splice(i, 1)
+  let dataJSON = JSON.stringify(dataPostEliminar);
+  localStorage.setItem('Post', dataJSON);
+  printPost(postId)
+  // afterRender()
+ 
+  }
+  };
+
+
+const EditarPost = (item) => {
+  const titlePost = document.querySelector('#title').value;
+  const contentPost = document.querySelector('#content').value;
+  const categoryPost = document.querySelector('#category').value;
+  const locationPost = document.querySelector('#location').value;
+  let editPost = savePostLS(titlePost, contentPost, categoryPost, locationPost);
+
+  let indexArray = arrayPost.findIndex((elemento)=>elemento.item === item);
+
+  arrayPost[indexArray].title1 = editPost;
+
+  afterRender();
+}
+
+/*var precioDescuento = 6120
+autos.forEach(function(item){
+      item.precio = precioDescuento
+    })
+console.log(autos);*/

@@ -23,6 +23,7 @@ const showTemplate = (route) => {
       containerRoot.appendChild(post());
       afterRender();
       cardPost()
+      
       break;
     default:
       containerRoot.innerHTML = `<img src="imagen/error404.jpg" alt="" class="error404">`;
